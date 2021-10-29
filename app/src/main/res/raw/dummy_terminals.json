@@ -1,0 +1,187 @@
+{
+  "content": [
+    {
+      "terminalId": "32668022",
+      "pos": "Epos Now",
+      "manufacturer": "VERIFONE",
+      "terminalName": "From_ronko",
+      "serialNumber": "877785",
+      "terminalStatus": "OFFLINE",
+      "_links": {
+        "self": {
+          "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal/23639f7f-268e-45c7-a824-a7f2489e9ce7"
+        },
+        "collection": {
+          "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal"
+        },
+        "transaction": {
+          "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal/23639f7f-268e-45c7-a824-a7f2489e9ce7/transaction/{transactionId}",
+          "templated": true
+        }
+      }
+    },
+    {
+      "terminalId": "22547821",
+      "pos": "Other",
+      "manufacturer": "INGENICO",
+      "terminalName": "nord",
+      "serialNumber": "877775",
+      "terminalStatus": "OFFLINE",
+      "_links": {
+        "self": {
+          "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal/de8f4352-fbad-4d3c-a529-412f5ad4b986"
+        },
+        "collection": {
+          "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal"
+        },
+        "transaction": {
+          "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal/de8f4352-fbad-4d3c-a529-412f5ad4b986/transaction/{transactionId}",
+          "templated": true
+        }
+      }
+    },
+    {
+      "terminalId": "22547852",
+      "pos": "Epos Now",
+      "manufacturer": "VERIFONE",
+      "terminalName": "nord",
+      "serialNumber": "877775",
+      "terminalStatus": "OFFLINE",
+      "_links": {
+        "self": {
+          "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal/b75a531d-df7c-4add-a83c-74f641501a4a"
+        },
+        "collection": {
+          "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal"
+        },
+        "transaction": {
+          "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal/b75a531d-df7c-4add-a83c-74f641501a4a/transaction/{transactionId}",
+          "templated": true
+        }
+      }
+    },
+    {
+      "terminalId": "82547852",
+      "pos": "Goodtill",
+      "manufacturer": "VERIFONE",
+      "terminalName": "nord",
+      "serialNumber": "877775",
+      "terminalStatus": "OFFLINE",
+      "_links": {
+        "self": {
+          "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal/727396b3-f235-401f-a45d-5be21056ed8a"
+        },
+        "collection": {
+          "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal"
+        },
+        "transaction": {
+          "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal/727396b3-f235-401f-a45d-5be21056ed8a/transaction/{transactionId}",
+          "templated": true
+        }
+      }
+    },
+    {
+      "terminalId": "32547852",
+      "pos": "IIKO",
+      "manufacturer": "VERIFONE",
+      "terminalName": "nord",
+      "serialNumber": "877775",
+      "terminalStatus": "OFFLINE",
+      "_links": {
+        "self": {
+          "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal/2747ce19-ded2-4c16-aee8-9ce1fbd741d9"
+        },
+        "collection": {
+          "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal"
+        },
+        "transaction": {
+          "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal/2747ce19-ded2-4c16-aee8-9ce1fbd741d9/transaction/{transactionId}",
+          "templated": true
+        }
+      }
+    },
+    {
+      "terminalId": "32485200",
+      "pos": "It Retail Services",
+      "manufacturer": "VERIFONE",
+      "terminalName": "nord",
+      "serialNumber": "877775",
+      "terminalStatus": "OFFLINE",
+      "_links": {
+        "self": {
+          "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal/768c18bf-f4c8-40ed-aea3-2b8ec1b81e94"
+        },
+        "collection": {
+          "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal"
+        },
+        "transaction": {
+          "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal/768c18bf-f4c8-40ed-aea3-2b8ec1b81e94/transaction/{transactionId}",
+          "templated": true
+        }
+      }
+    },
+    {
+      "terminalId": "32475200",
+      "pos": "Vend",
+      "manufacturer": "VERIFONE",
+      "terminalName": "nord",
+      "serialNumber": "877775",
+      "terminalStatus": "OFFLINE",
+      "_links": {
+        "self": {
+          "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal/f40cd167-975f-4b12-ad1f-564d19778570"
+        },
+        "collection": {
+          "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal"
+        },
+        "transaction": {
+          "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal/f40cd167-975f-4b12-ad1f-564d19778570/transaction/{transactionId}",
+          "templated": true
+        }
+      }
+    },
+    {
+      "terminalId": "32475000",
+      "pos": "WorkFlowDigital",
+      "manufacturer": "VERIFONE",
+      "terminalName": "nord",
+      "serialNumber": "877775",
+      "terminalStatus": "OFFLINE",
+      "_links": {
+        "self": {
+          "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal/c9fea750-c395-48be-947f-0a557a886313"
+        },
+        "collection": {
+          "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal"
+        },
+        "transaction": {
+          "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal/c9fea750-c395-48be-947f-0a557a886313/transaction/{transactionId}",
+          "templated": true
+        }
+      }
+    },
+    {
+      "terminalId": "32665000",
+      "pos": "Other",
+      "manufacturer": "VERIFONE",
+      "terminalName": "nord",
+      "serialNumber": "877775",
+      "terminalStatus": "OFFLINE",
+      "_links": {
+        "self": {
+          "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal/317ab671-5930-4255-b11d-621f4d936d14"
+        },
+        "collection": {
+          "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal"
+        },
+        "transaction": {
+          "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal/317ab671-5930-4255-b11d-621f4d936d14/transaction/{transactionId}",
+          "templated": true
+        }
+      }
+    }
+  ],
+  "links": [
+    "https://api-terminal-dev1.retailmerchantservices.net/terminal"
+  ]
+}

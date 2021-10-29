@@ -1,0 +1,20 @@
+{
+   "terminalId": "32668022",
+   "pos": "Epos Now",
+   "manufacturer": "VERIFONE",
+   "terminalName": "From_ronko",
+   "serialNumber": "877785",
+   "terminalStatus": "OFFLINE",
+   "_links": {
+       "self": {
+           "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal/23639f7f-268e-45c7-a824-a7f2489e9ce7"
+       },
+       "collection": {
+           "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal"
+       },
+       "transaction": {
+           "href": "https://api-terminal-dev1.retailmerchantservices.net/terminal/23639f7f-268e-45c7-a824-a7f2489e9ce7/transaction/{transactionId}",
+           "templated": true
+       }
+   }
+}

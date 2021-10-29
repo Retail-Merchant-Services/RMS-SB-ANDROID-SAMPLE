@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tvEnterAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="32dp"
+        android:hint="@string/enter_amount"
+        android:paddingHorizontal="4dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEnterAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:completionThreshold="1"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:maxLines="1" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tvCashback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/enter_cashBack_amount"
+        android:paddingHorizontal="4dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEnterAmount">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEnterCashBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:completionThreshold="1"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:maxLines="1" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/btPaySale"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="4dp"
+        android:text="@string/sale_transaction"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/btRefund"
+        app:layout_constraintStart_toStartOf="@id/tvEnterAmount"
+        app:layout_constraintTop_toBottomOf="@id/tvCashback" />
+
+    <Button
+        android:id="@+id/btRefund"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="4dp"
+        android:text="@string/refund_transaction"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/btCashback"
+        app:layout_constraintStart_toEndOf="@+id/btPaySale"
+        app:layout_constraintTop_toBottomOf="@id/tvCashback" />
+
+    <Button
+        android:id="@+id/btCashback"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/cashback_transaction"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/tvEnterAmount"
+        app:layout_constraintStart_toEndOf="@+id/btRefund"
+        app:layout_constraintTop_toBottomOf="@id/tvCashback" />
+
+    <Button
+        android:id="@+id/btInProgress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/transaction_in_progress"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/tvEnterAmount"
+        app:layout_constraintStart_toStartOf="@id/tvEnterAmount"
+        app:layout_constraintTop_toBottomOf="@id/tvCashback" />
+
+    <!--    <Button-->
+    <!--        android:id="@+id/btCancel"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="4dp"-->
+    <!--        android:text="@string/cancel_transaction"-->
+    <!--        android:visibility="invisible"-->
+    <!--        app:layout_constraintEnd_toEndOf="@id/tvEnterAmount"-->
+    <!--        app:layout_constraintStart_toStartOf="@id/tvEnterAmount"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/btInProgress" />-->
+
+    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--        android:id="@+id/clReceipt"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginHorizontal="32dp"-->
+    <!--        android:layout_marginTop="62dp"-->
+    <!--        android:background="@drawable/bg_receipt"-->
+    <!--        android:padding="12dp"-->
+    <!--        android:visibility="gone"-->
+    <!--        app:layout_constraintEnd_toEndOf="@id/tvEnterAmount"-->
+    <!--        app:layout_constraintStart_toStartOf="@id/tvEnterAmount"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/btCancel">-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/tvTransactionTitle"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:gravity="center"-->
+    <!--            android:text="Transaction Receipt"-->
+    <!--            android:textSize="18sp"-->
+    <!--            android:textStyle="bold"-->
+    <!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/tvTransactionId"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginTop="32dp"-->
+    <!--            android:textSize="16sp"-->
+    <!--            app:layout_constraintTop_toBottomOf="@id/tvTransactionTitle" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/tvTransactionAmount"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginTop="8dp"-->
+    <!--            android:textSize="16sp"-->
+    <!--            app:layout_constraintTop_toBottomOf="@id/tvTransactionId" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/tvTransactionStatus"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginTop="8dp"-->
+    <!--            android:text="Transaction Status: "-->
+    <!--            android:textSize="16sp"-->
+    <!--            android:textStyle="bold"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toBottomOf="@id/tvTransactionAmount" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/tvTransactionStatusValue"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:textSize="16sp"-->
+    <!--            android:textStyle="bold"-->
+    <!--            app:layout_constraintBottom_toBottomOf="@id/tvTransactionStatus"-->
+    <!--            app:layout_constraintStart_toEndOf="@id/tvTransactionStatus"-->
+    <!--            app:layout_constraintTop_toTopOf="@id/tvTransactionStatus" />-->
+
+    <!--        <Button-->
+    <!--            android:id="@+id/btCheckStatus"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginTop="16dp"-->
+    <!--            android:text="@string/refresh_status"-->
+    <!--            app:layout_constraintTop_toBottomOf="@id/tvTransactionStatus" />-->
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvReceipts"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginVertical="16dp"
+        android:paddingTop="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/tvEnterAmount"
+        app:layout_constraintStart_toStartOf="@id/tvEnterAmount"
+        app:layout_constraintTop_toBottomOf="@id/btPaySale" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

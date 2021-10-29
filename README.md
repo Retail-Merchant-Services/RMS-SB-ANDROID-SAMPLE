@@ -1,21 +1,16 @@
 # RMS-SB-Android-SAMPLE-APP
 
-To get a Git project into your build:
+Initialize the sdk configuration in your application global
 
-Step 1. Add the JitPack repository to your build file
-
-Add it in your settings.gradle at the end of repositories:
-
-allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
-	}
-Step 2. Add the dependency in your app build.gradle file
-
-dependencies {
-        implementation('com.github.Retail-Merchant-Services:RMS-SB-ANDROID-SDK:1.0.4@aar') {
-            transitive = true
-          }
-     }
+```
+RmsClient.configure(
+        this, RmsConfiguration(
+        clientID = "yourClientId",
+        clientSecret = "yourClientSecret",
+        callbackUrl = "yourCallBackUrl",
+        signOutUrl = "yourSignOutUrl",
+        baseUrl = "yourBaseUrl",
+        oAuthUrl = "youroAuthUrl"
+        )
+)
+```

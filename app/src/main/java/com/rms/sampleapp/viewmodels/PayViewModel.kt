@@ -3,16 +3,17 @@ package com.rms.sampleapp.viewmodels
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.rms.sampleapp.utils.SingleLiveEvent
-import com.rms.sampleapp.utils.getTerminalId
-import com.rms.sampleapp.utils.getTransactionId
 import com.kachyng.rmssdk.RmsClient
 import com.kachyng.rmssdk.callbacks.RmsApiCallback
 import com.kachyng.rmssdk.constants.CurrencyCode
+import com.kachyng.rmssdk.exceptions.RmsApiError
 import com.kachyng.rmssdk.exceptions.RmsApiException
 import com.kachyng.rmssdk.repository.model.Terminal
 import com.kachyng.rmssdk.repository.model.Transaction
 import com.rms.sampleapp.R
+import com.rms.sampleapp.utils.SingleLiveEvent
+import com.rms.sampleapp.utils.getTerminalId
+import com.rms.sampleapp.utils.getTransactionId
 
 class PayViewModel(application: Application) : BaseViewModel(application) {
 
@@ -23,6 +24,8 @@ class PayViewModel(application: Application) : BaseViewModel(application) {
     private val transactionInfo = MutableLiveData<Transaction>()
 
     private val transactionListInfo = MutableLiveData<List<Transaction>>()
+
+    val onCancelTransactionSuccess = MutableLiveData<Boolean>()
 
     val scrollListToBottom = SingleLiveEvent<Boolean>()
 
@@ -95,26 +98,49 @@ class PayViewModel(application: Application) : BaseViewModel(application) {
     }
 
     fun onPayClick(amountText: String, saleType: String) {
-        val amount = amountText.toIntOrNull()
+        var amount = amountText.toDoubleOrNull()
         when {
             amount == null -> toastResId.value = R.string.error_invalid_input
-            amount < 100 -> toastResId.value = R.string.error_invalid_amount
-            else -> makeTransaction(amount, saleType)
+            amount < 1.0 -> toastResId.value = R.string.error_invalid_amount
+            else -> makeTransaction((amount*100).toInt(), saleType)
         }
     }
 
     fun onCashBackPayClick(amountText: String, cashBackAmountText: String, saleType: String) {
-        val amount = amountText.toIntOrNull()
-        val cashBackAmount = cashBackAmountText.toIntOrNull()
+        val amount = amountText.toDoubleOrNull()
+        val cashBackAmount = cashBackAmountText.toDoubleOrNull()
         when {
             amount == null -> toastResId.value = R.string.error_invalid_input
+            amount < 1.0 -> toastResId.value = R.string.error_invalid_amount
             cashBackAmount == null -> toastResId.value = R.string.error_invalid_cashback_input
-            amount < 100 -> toastResId.value = R.string.error_invalid_amount
-            cashBackAmount < 100 -> toastResId.value = R.string.error_invalid_amount
+            cashBackAmount < 1.0 -> toastResId.value = R.string.error_invalid_amount
             amount < cashBackAmount -> toastResId.value = R.string.error_cashback_amount_greater
-            else -> makeTransaction(amount, saleType, cashBackAmount)
+            else -> makeTransaction((amount*100).toInt(), saleType, (cashBackAmount * 100).toInt())
         }
     }
+
+    fun cancelTransaction(transaction: Transaction) {
+        isShowLoader.value = true
+        RmsClient.setActiveTerminal(transaction.terminalId)
+        RmsClient.cancelTransaction(transaction.getTransactionId(),
+            object : RmsApiCallback<Void> {
+                override fun error(exception: RmsApiException) {
+                    isShowLoader.value = false
+                    if (exception.apiError.toString() == RmsApiError.ERROR_NO_CONTENT.toString()) {
+                        onCancelTransactionSuccess.value = true
+                    } else {
+                        onCancelTransactionSuccess.value = false
+                        snackbarMessage.value = exception.message
+                    }
+                }
+
+                override fun success(data: Void) {
+                    isShowLoader.value = false
+                    onCancelTransactionSuccess.value = true
+                }
+            })
+    }
+
 
 //    fun onCancelClick() {
 //        if (transactionJob?.isActive == true) {

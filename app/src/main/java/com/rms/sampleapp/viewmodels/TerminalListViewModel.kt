@@ -13,6 +13,7 @@ class TerminalListViewModel(application: Application) : BaseViewModel(applicatio
 
     val terminalList = MutableLiveData<ModelTerminalList>()
     val viewTerminalDetails = SingleLiveEvent<Terminal>()
+    val searchTransaction = SingleLiveEvent<Boolean>()
     val viewPayScreen = SingleLiveEvent<Terminal>()
 
     init {
@@ -36,6 +37,10 @@ class TerminalListViewModel(application: Application) : BaseViewModel(applicatio
 
     fun viewTerminal(terminal: Terminal) {
         viewTerminalDetails.value = terminal
+    }
+
+    fun searchTransaction() {
+        searchTransaction.value = true
     }
 
     fun openPayScreen(terminal: Terminal) {

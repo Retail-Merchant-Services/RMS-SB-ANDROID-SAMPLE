@@ -70,6 +70,7 @@ class TransactionsListApiAdapter(private val listener: TransactionActionListener
         private val tvTransactionStatus: TextView = itemView.findViewById(R.id.tvTransactionStatus)
         private val tvTransactionType: TextView = itemView.findViewById(R.id.tvTransactionType)
         private val tvCashBackAmount: TextView = itemView.findViewById(R.id.tvCashBackAmount)
+        private val tvFinalTransactionAmount: TextView = itemView.findViewById(R.id.tvFinalTransactionAmount)
         val btCancel: Button = itemView.findViewById(R.id.btCancel)
 
         constructor(parent: ViewGroup) : this(
@@ -88,7 +89,7 @@ class TransactionsListApiAdapter(private val listener: TransactionActionListener
             with(item) {
                 //Set title of the album
                 tvTransactionAmount.text = Html.fromHtml(
-                    "<b>Transaction Amount: </b>${amount / 100} $currencyCode",
+                    "<b>Transaction Amount: </b>${amount.toDouble() / 100} $currencyCode",
                     Html.FROM_HTML_MODE_LEGACY
                 )
 
@@ -112,14 +113,23 @@ class TransactionsListApiAdapter(private val listener: TransactionActionListener
                     Html.FROM_HTML_MODE_LEGACY
                 )
 
-                if (0 != amountCashback) {
+                if (amountCashback>0) {
                     tvCashBackAmount.visibility = View.VISIBLE
+                    tvFinalTransactionAmount.visibility = View.VISIBLE
+
                     tvCashBackAmount.text = Html.fromHtml(
                         "<b>Cashback Amount: </b>${(amountCashback.toDouble() / 100)} $currencyCode",
                         Html.FROM_HTML_MODE_LEGACY
                     )
+
+                    tvFinalTransactionAmount.text = Html.fromHtml(
+                        "<b>Final Transaction Amount: </b>${(finalTransactionAmount.toDouble() / 100)} $currencyCode",
+                        Html.FROM_HTML_MODE_LEGACY
+                    )
+
                 } else {
                     tvCashBackAmount.visibility = View.GONE
+                    tvFinalTransactionAmount.visibility = View.GONE
                 }
             }
 

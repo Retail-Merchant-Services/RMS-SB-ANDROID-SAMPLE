@@ -1,10 +1,12 @@
 package com.rms.sampleapp.views.fragments
 
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.annotation.AnimatorRes
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
@@ -139,6 +141,20 @@ abstract class BaseFragment<BVM : BaseViewModel> : Fragment() {
 
     fun showDialogMessage(title: String, message: String) {
         baseActivity?.showDialogMessage(title, message)
+    }
+
+    fun hideSoftKeyboard() {
+        val inputMethodManager = requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as
+                InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
+    }
+
+    fun showSoftKeyboard() {
+        (requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+            .toggleSoftInput(
+                InputMethodManager.SHOW_FORCED,
+                InputMethodManager.HIDE_IMPLICIT_ONLY
+            )
     }
 
     fun goBack() {

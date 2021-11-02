@@ -32,6 +32,19 @@
         app:layout_constraintTop_toBottomOf="@id/tvTransactionAmount" />
 
     <TextView
+        android:id="@+id/tvFinalTransactionAmount"
+        android:text="Final Transaction Amount: 21w21"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:drawablePadding="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:drawableEndCompat="@drawable/ic_dot"
+        app:layout_constraintTop_toBottomOf="@id/tvCashBackAmount" />
+
+
+    <TextView
         android:id="@+id/tvTransactionId"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -39,7 +52,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="Transaction Id: 1234"
-        app:layout_constraintTop_toBottomOf="@id/tvCashBackAmount" />
+        app:layout_constraintTop_toBottomOf="@id/tvFinalTransactionAmount" />
 
     <TextView
         android:id="@+id/tvTransactionStage"
@@ -84,5 +97,14 @@
         android:layout_marginTop="16dp"
         android:text="@string/refresh_status"
         app:layout_constraintTop_toBottomOf="@id/tvTransactionType" />
+
+    <Button
+        android:id="@+id/btCancelTransaction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/cancel_transaction"
+        app:layout_constraintTop_toBottomOf="@id/btCheckStatus" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

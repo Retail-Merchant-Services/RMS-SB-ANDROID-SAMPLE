@@ -34,6 +34,11 @@ class TerminalsListFragment : BaseFragment<TerminalListViewModel>() {
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             adapter = terminalAdapter
         }
+
+        //Set click listener
+        actionSearch.setOnClickListener {
+            viewModel.searchTransaction()
+        }
     }
 
     override fun registerObservables() {
@@ -55,6 +60,15 @@ class TerminalsListFragment : BaseFragment<TerminalListViewModel>() {
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.container, PayFragment.newInstance(terminal))
                     .addToBackStack(PayFragment::class.simpleName)
+                    .commit()
+            }
+        }
+
+        viewModel.searchTransaction.observe(viewLifecycleOwner) {
+            it?.let {
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.container, SearchTransactionFragment())
+                    .addToBackStack(SearchTransactionFragment::class.simpleName)
                     .commit()
             }
         }

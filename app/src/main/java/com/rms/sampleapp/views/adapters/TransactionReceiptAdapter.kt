@@ -1,6 +1,7 @@
 package com.rms.sampleapp.views.adapters
 
 import android.text.Html
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,19 +23,24 @@ class TransactionReceiptAdapter(private val listener: TransactionActionListener)
     private val arrayList = arrayListOf<Transaction>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransactionViewHolder {
-        //Create viewholder for the album
+        //Create viewHolder for the album
         return TransactionViewHolder(parent)
     }
 
     override fun getItemCount() = arrayList.size //Count of terminals
 
     override fun onBindViewHolder(holder: TransactionViewHolder, position: Int) {
-        //Bind the terminal into viewholder
+        //Bind the terminal into viewHolder
         holder.bind(arrayList[position])
 
         //Add click listeners
         holder.btCheckStatus.setOnClickListener {
             listener.onRefreshClicked(arrayList[position])
+        }
+
+        holder.btCancelTransaction.setOnClickListener {
+            Log.e("UrlTransaction", "onBindViewHolder: " + arrayList[position]._links.self.href)
+            listener.onCancelTransaction(arrayList[position],position)
         }
     }
 
@@ -66,7 +72,9 @@ class TransactionReceiptAdapter(private val listener: TransactionActionListener)
         private val tvTransactionStatus: TextView = itemView.findViewById(R.id.tvTransactionStatus)
         private val tvTransactionType: TextView = itemView.findViewById(R.id.tvTransactionType)
         private val tvCashBackAmount: TextView = itemView.findViewById(R.id.tvCashBackAmount)
+        private val tvFinalTransactionAmount: TextView = itemView.findViewById(R.id.tvFinalTransactionAmount)
         val btCheckStatus: TextView = itemView.findViewById(R.id.btCheckStatus)
+        val btCancelTransaction: TextView = itemView.findViewById(R.id.btCancelTransaction)
 
         constructor(parent: ViewGroup) : this(
             LayoutInflater.from(parent.context).inflate(
@@ -113,15 +121,27 @@ class TransactionReceiptAdapter(private val listener: TransactionActionListener)
                     Html.FROM_HTML_MODE_LEGACY
                 )
 
-                if (0 != item.amountCashback) {
+                if (item.amountCashback>0) {
                     tvCashBackAmount.visibility = View.VISIBLE
+                    tvFinalTransactionAmount.visibility = View.VISIBLE
+
                     tvCashBackAmount.text = Html.fromHtml(
                         "<b>Cashback Amount: </b>${(amountCashback.toDouble() / 100)} $currencyCode",
                         Html.FROM_HTML_MODE_LEGACY
                     )
+
+                    tvFinalTransactionAmount.text = Html.fromHtml(
+                        "<b>Final Transaction Amount: </b>${(finalTransactionAmount.toDouble() / 100)} $currencyCode",
+                        Html.FROM_HTML_MODE_LEGACY
+                    )
+
                 } else {
                     tvCashBackAmount.visibility = View.GONE
+                    tvFinalTransactionAmount.visibility = View.GONE
                 }
+
+
+
             }
         }
     }

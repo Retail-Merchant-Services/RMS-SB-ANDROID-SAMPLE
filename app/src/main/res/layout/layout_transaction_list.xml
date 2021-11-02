@@ -30,6 +30,18 @@
         tools:text="Cashback Amount: 21w21" />
 
     <TextView
+        android:id="@+id/tvFinalTransactionAmount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:drawablePadding="8dp"
+        app:drawableEndCompat="@drawable/ic_dot"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvCashBackAmount"
+        tools:text="Final Transaction Amount: 21w21" />
+
+    <TextView
         android:id="@+id/tvTransactionId"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -37,7 +49,7 @@
         android:text="Transaction Id: 1234"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvCashBackAmount" />
+        app:layout_constraintTop_toBottomOf="@id/tvFinalTransactionAmount" />
 
     <TextView
         android:id="@+id/tvTransactionStage"
@@ -83,6 +95,7 @@
         android:layout_marginEnd="4dp"
         android:text="@string/cancel_transaction"
         android:textSize="16sp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTransactionType" />

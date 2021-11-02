@@ -6,12 +6,12 @@ import com.rms.sampleapp.utils.SingleLiveEvent
 import com.kachyng.rmssdk.RmsClient
 import com.kachyng.rmssdk.callbacks.RmsApiCallback
 import com.kachyng.rmssdk.exceptions.RmsApiException
+import com.kachyng.rmssdk.repository.model.ModelTerminal
 import com.kachyng.rmssdk.repository.model.Terminal
-import com.kachyng.rmssdk.repository.model.ModelTerminalList
 
 class TerminalListViewModel(application: Application) : BaseViewModel(application) {
 
-    val terminalList = MutableLiveData<ModelTerminalList>()
+    val terminalList = MutableLiveData<ModelTerminal>()
     val viewTerminalDetails = SingleLiveEvent<Terminal>()
     val searchTransaction = SingleLiveEvent<Boolean>()
     val viewPayScreen = SingleLiveEvent<Terminal>()
@@ -22,8 +22,8 @@ class TerminalListViewModel(application: Application) : BaseViewModel(applicatio
 
     private fun fetchTerminalsList() {
         isShowLoader.value = true
-        RmsClient.getTerminalsList(object : RmsApiCallback<ModelTerminalList> {
-            override fun success(data: ModelTerminalList) {
+        RmsClient.getTerminalsList(object : RmsApiCallback<ModelTerminal> {
+            override fun success(data: ModelTerminal) {
                 isShowLoader.value = false
                 terminalList.value = data
             }

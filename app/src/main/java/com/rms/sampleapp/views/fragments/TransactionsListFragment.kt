@@ -2,8 +2,12 @@ package com.rms.sampleapp.views.fragments
 
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.kachyng.rmssdk.repository.model.Terminal
+import com.kachyng.rmssdk.repository.model.Transaction
 import com.rms.sampleapp.R
 import com.rms.sampleapp.utils.getTerminalId
 import com.rms.sampleapp.viewmodels.TransactionListViewModel
@@ -12,10 +16,13 @@ import com.rms.sampleapp.views.adapters.TransactionStatusListAdapter
 import com.rms.sampleapp.views.adapters.TransactionsListApiAdapter
 import com.rms.sampleapp.views.interfaces.TransactionActionListener
 import com.rms.sampleapp.views.interfaces.TransactionFilterListener
-import com.kachyng.rmssdk.repository.model.Terminal
-import com.kachyng.rmssdk.repository.model.Transaction
 import kotlinx.android.synthetic.main.filter_list_view.*
+import kotlinx.android.synthetic.main.fragment_search_transaction.*
 import kotlinx.android.synthetic.main.fragment_transactions_list.*
+import kotlinx.android.synthetic.main.fragment_transactions_list.etSearch
+import kotlinx.android.synthetic.main.fragment_transactions_list.rvTerminals
+import kotlinx.android.synthetic.main.fragment_transactions_list.tvFilter
+import kotlinx.android.synthetic.main.fragment_transactions_list.tvNoData
 
 class TransactionsListFragment : BaseFragment<TransactionListViewModel>() {
 
@@ -92,11 +99,28 @@ class TransactionsListFragment : BaseFragment<TransactionListViewModel>() {
 
         }
 
+        //Set search action
+        etSearch.requestFocus()
+        etSearch.isFocusableInTouchMode = true
+        showSoftKeyboard()
+
+        etSearch.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                //Api call
+                viewModel.searchTransactionById(
+                    etSearch.text.toString().trim()
+                )
+                return@OnEditorActionListener true
+            }
+            false
+        })
+
+
         //Set click listener for search
         btnSearch.setOnClickListener {
             clFilterContentView.visibility = View.GONE
             tvFilter.text = getString(R.string.st_filter)
-            viewModel.searchTransaction(terminalId, transactionStatus, transactionType)
+            viewModel.searchTransactions(terminalId, transactionStatus, transactionType)
 
         }
 
@@ -168,6 +192,6 @@ class TransactionsListFragment : BaseFragment<TransactionListViewModel>() {
 
     override fun onResume() {
         super.onResume()
-        requireActivity().title = "List of transaction"
+        requireActivity().title = "List of transactions"
     }
 }

@@ -13,6 +13,8 @@ import com.rms.sampleapp.viewmodels.PayViewModel
 import com.rms.sampleapp.views.adapters.TransactionReceiptAdapter
 import com.rms.sampleapp.views.interfaces.TransactionActionListener
 import kotlinx.android.synthetic.main.fragment_pay.*
+import me.abhinay.input.CurrencySymbols
+import java.util.*
 
 class PayFragment : BaseFragment<PayViewModel>() {
 

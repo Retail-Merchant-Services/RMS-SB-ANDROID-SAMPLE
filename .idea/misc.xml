@@ -14,6 +14,10 @@
         <entry key="..\:/Dev Story/AkshayProjects/kachyngSample/app/src/main/res/layout/layout_transaction_receipt.xml" value="0.36666666666666664" />
         <entry key="..\:/Dev Story/AkshayProjects/kachyngSample/app/src/main/res/layout/layout_transaction_status_list.xml" value="0.36666666666666664" />
         <entry key="app/src/main/res/layout/activity_demo.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_pay.xml" value="0.11322463768115942" />
+        <entry key="app/src/main/res/layout/fragment_search_transaction.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_terminals_list.xml" value="0.11322463768115942" />
+        <entry key="app/src/main/res/layout/fragment_transactions_list.xml" value="0.1" />
       </map>
     </option>
   </component>

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.Retail-Merchant-Services:RMS-SB-ANDROID-SDK:1.0.9@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/ed683a56c048f087e4cc755717ae11a2/transformed/jetified-RMS-SB-ANDROID-SDK-1.0.9/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ed683a56c048f087e4cc755717ae11a2/transformed/jetified-RMS-SB-ANDROID-SDK-1.0.9/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ed683a56c048f087e4cc755717ae11a2/transformed/jetified-RMS-SB-ANDROID-SDK-1.0.9/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

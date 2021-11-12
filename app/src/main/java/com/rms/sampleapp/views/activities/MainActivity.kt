@@ -2,11 +2,10 @@ package com.rms.sampleapp.views.activities
 
 import android.content.Intent
 import android.os.Bundle
-import com.rms.sampleapp.R
-import com.rms.sampleapp.utils.ApplicationGlobal
 import com.kachyng.rmssdk.RmsClient
 import com.kachyng.rmssdk.callbacks.RmsAuthCallback
 import com.kachyng.rmssdk.exceptions.RmsAuthException
+import com.rms.sampleapp.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -18,8 +17,7 @@ class MainActivity : BaseActivity() {
         btSignIn.setOnClickListener {
             RmsClient.signIn(this, object : RmsAuthCallback {
                 override fun success(accessToken: String, refreshToken: String) {
-                    ApplicationGlobal.accessToken = accessToken
-                    ApplicationGlobal.refreshToken = refreshToken
+                    RmsClient.setTokens(accessToken, refreshToken)
                     startActivity(Intent(this@MainActivity, HomeActivity::class.java))
                     finishAffinity()
                 }

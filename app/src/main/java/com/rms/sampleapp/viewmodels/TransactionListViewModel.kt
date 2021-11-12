@@ -18,12 +18,14 @@ class TransactionListViewModel(application: Application) : BaseViewModel(applica
         RmsClient.getTransactionsList(object : RmsApiCallback<ModelTransaction> {
             override fun error(exception: RmsApiException) {
                 isShowLoader.value = false
-                snackbarMessage.value = exception.message
+                snackbarMessage.value = exception.apiError.message
             }
 
-            override fun success(data: ModelTransaction) {
+            override fun success(data: ModelTransaction?) {
                 isShowLoader.value = false
-                transactionList.value = data
+                data?.let {
+                    transactionList.value = data
+                }
             }
         })
     }
@@ -37,12 +39,14 @@ class TransactionListViewModel(application: Application) : BaseViewModel(applica
             callback = object : RmsApiCallback<ModelTransaction> {
                 override fun error(exception: RmsApiException) {
                     isShowLoader.value = false
-                    snackbarMessage.value = exception.message
+                    snackbarMessage.value = exception.apiError.message
                 }
 
-                override fun success(data: ModelTransaction) {
+                override fun success(data: ModelTransaction?) {
                     isShowLoader.value = false
-                    transactionList.value = data
+                    data?.let {
+                        transactionList.value = data
+                    }
                 }
             })
     }
@@ -54,22 +58,24 @@ class TransactionListViewModel(application: Application) : BaseViewModel(applica
             object : RmsApiCallback<Transaction> {
                 override fun error(exception: RmsApiException) {
                     isShowLoader.value = false
-                    snackbarMessage.value = exception.message
+                    snackbarMessage.value = exception.apiError.message
                 }
 
-                override fun success(data: Transaction) {
+                override fun success(data: Transaction?) {
                     isShowLoader.value = false
-                    val transactionsList = listOf(data)
-                    val embeddedTransactions = EmbeddedTransactions(transactionsList)
+                    data?.let {
+                        val transactionsList = listOf(data)
+                        val embeddedTransactions = EmbeddedTransactions(transactionsList)
 
-                    transactionList.value = ModelTransaction(
-                        embeddedTransactions,
-                        OuterLink(
-                            Url("", null), Url("", null),
-                            Url("", null), Url("", null),
-                            Url("", null)
+                        transactionList.value = ModelTransaction(
+                            embeddedTransactions,
+                            OuterLink(
+                                Url("", null), Url("", null),
+                                Url("", null), Url("", null),
+                                Url("", null)
+                            )
                         )
-                    )
+                    }
                 }
             })
     }

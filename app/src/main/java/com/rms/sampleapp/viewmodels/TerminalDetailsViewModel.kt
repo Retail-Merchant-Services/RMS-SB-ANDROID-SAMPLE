@@ -2,13 +2,12 @@ package com.rms.sampleapp.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import com.rms.sampleapp.utils.SingleLiveEvent
-import com.rms.sampleapp.utils.getTerminalId
 import com.kachyng.rmssdk.RmsClient
 import com.kachyng.rmssdk.callbacks.RmsApiCallback
-import com.kachyng.rmssdk.exceptions.RmsApiError
 import com.kachyng.rmssdk.exceptions.RmsApiException
 import com.kachyng.rmssdk.repository.model.Terminal
+import com.rms.sampleapp.utils.SingleLiveEvent
+import com.rms.sampleapp.utils.getTerminalId
 
 class TerminalDetailsViewModel(application: Application) : BaseViewModel(application) {
 
@@ -22,14 +21,16 @@ class TerminalDetailsViewModel(application: Application) : BaseViewModel(applica
         isShowLoader.value = true
         RmsClient.setActiveTerminal(terminal.getTerminalId())
         RmsClient.getTerminalDetails(object : RmsApiCallback<Terminal> {
-            override fun success(data: Terminal) {
+            override fun success(data: Terminal?) {
                 isShowLoader.value = false
-                terminalDetails.value = data
+                data?.let {
+                    terminalDetails.value = data
+                }
             }
 
             override fun error(exception: RmsApiException) {
                 isShowLoader.value = false
-                snackbarMessage.value = exception.message
+                snackbarMessage.value = exception.apiError.message
             }
 
         })
@@ -47,15 +48,10 @@ class TerminalDetailsViewModel(application: Application) : BaseViewModel(applica
         RmsClient.requestReportByType(reportType, object : RmsApiCallback<Void> {
             override fun error(exception: RmsApiException) {
                 isShowLoader.value = false
-                if (exception.apiError.toString() == RmsApiError.ERROR_NO_CONTENT.toString()) {
-                    onReportSuccess.value = true
-                } else {
-                    onReportSuccess.value = false
-                    snackbarMessage.value = exception.message
-                }
+                snackbarMessage.value = exception.apiError.message
             }
 
-            override fun success(data: Void) {
+            override fun success(data: Void?) {
                 isShowLoader.value = false
                 onReportSuccess.value = true
             }

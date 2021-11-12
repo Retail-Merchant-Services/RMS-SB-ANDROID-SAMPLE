@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import com.kachyng.rmssdk.RmsClient
 import com.kachyng.rmssdk.callbacks.RmsApiCallback
 import com.kachyng.rmssdk.constants.CurrencyCode
-import com.kachyng.rmssdk.exceptions.RmsApiError
 import com.kachyng.rmssdk.exceptions.RmsApiException
 import com.kachyng.rmssdk.repository.model.Terminal
 import com.kachyng.rmssdk.repository.model.Transaction
@@ -17,11 +16,7 @@ import com.rms.sampleapp.utils.getTransactionId
 
 class PayViewModel(application: Application) : BaseViewModel(application) {
 
-//    private var transactionJob: Job? = null
-
     private val transactionOngoing = MutableLiveData<Boolean>()
-
-    private val transactionInfo = MutableLiveData<Transaction>()
 
     private val transactionListInfo = MutableLiveData<List<Transaction>>()
 
@@ -44,65 +39,57 @@ class PayViewModel(application: Application) : BaseViewModel(application) {
             saleType,
             cashBackAmount,
             object : RmsApiCallback<Transaction> {
-                override fun success(data: Transaction) {
+                override fun success(data: Transaction?) {
                     transactionOngoing.value = false
-//                    transactionInfo.value = data
+                    data?.let {
+                        val list = arrayListOf<Transaction>()
+                        list.addAll(transactionListInfo.value ?: emptyList())
+                        list.add(data)
+                        transactionListInfo.value = list
+                        scrollListToBottom.value = true
+                    }
 
-                    val list = arrayListOf<Transaction>()
-                    list.addAll(transactionListInfo.value ?: emptyList())
-                    list.add(data)
-                    transactionListInfo.value = list
-                    scrollListToBottom.value = true
                 }
 
                 override fun error(exception: RmsApiException) {
                     transactionOngoing.value = false
-                    snackbarMessage.value = exception.message
+                    snackbarMessage.value = exception.apiError.message
                 }
             })
     }
-
-//    fun checkTransactionStatus() {
-//        val transaction = transactionInfo.value
-//        if (transaction == null) {
-//            toastResId.value = R.string.no_transaction_made_yet
-//            return
-//        }
-//        checkTransactionStatus(transaction)
-//    }
 
     fun checkTransactionStatus(transaction: Transaction) {
         isShowLoader.value = true
         RmsClient.checkStatus(transaction.getTransactionId(),
             object : RmsApiCallback<Transaction> {
-                override fun success(data: Transaction) {
+                override fun success(data: Transaction?) {
                     isShowLoader.value = false
-//                    transactionInfo.value = data
-
-                    val list = arrayListOf<Transaction>()
-                    transactionListInfo.value?.forEach { item ->
-                        if (item.getTransactionId() == data.getTransactionId()) {
-                            list.add(data)
-                        } else {
-                            list.add(item)
+                    data?.let {
+                        val list = arrayListOf<Transaction>()
+                        transactionListInfo.value?.forEach { item ->
+                            if (item.getTransactionId() == data.getTransactionId()) {
+                                list.add(data)
+                            } else {
+                                list.add(item)
+                            }
                         }
+                        transactionListInfo.value = list
                     }
-                    transactionListInfo.value = list
                 }
 
                 override fun error(exception: RmsApiException) {
                     isShowLoader.value = false
-                    snackbarMessage.value = exception.message
+                    snackbarMessage.value = exception.apiError.message
                 }
             })
     }
 
     fun onPayClick(amountText: String, saleType: String) {
-        var amount = amountText.toDoubleOrNull()
+        val amount = amountText.toDoubleOrNull()
         when {
             amount == null -> toastResId.value = R.string.error_invalid_input
             amount < 1.0 -> toastResId.value = R.string.error_invalid_amount
-            else -> makeTransaction((amount*100).toInt(), saleType)
+            else -> makeTransaction((amount * 100).toInt(), saleType)
         }
     }
 
@@ -115,7 +102,11 @@ class PayViewModel(application: Application) : BaseViewModel(application) {
             cashBackAmount == null -> toastResId.value = R.string.error_invalid_cashback_input
             cashBackAmount < 1.0 -> toastResId.value = R.string.error_invalid_amount
             amount < cashBackAmount -> toastResId.value = R.string.error_cashback_amount_greater
-            else -> makeTransaction((amount*100).toInt(), saleType, (cashBackAmount * 100).toInt())
+            else -> makeTransaction(
+                (amount * 100).toInt(),
+                saleType,
+                (cashBackAmount * 100).toInt()
+            )
         }
     }
 
@@ -126,29 +117,16 @@ class PayViewModel(application: Application) : BaseViewModel(application) {
             object : RmsApiCallback<Void> {
                 override fun error(exception: RmsApiException) {
                     isShowLoader.value = false
-                    if (exception.apiError.toString() == RmsApiError.ERROR_NO_CONTENT.toString()) {
-                        onCancelTransactionSuccess.value = true
-                    } else {
-                        onCancelTransactionSuccess.value = false
-                        snackbarMessage.value = exception.message
-                    }
+                    snackbarMessage.value = exception.apiError.message
                 }
 
-                override fun success(data: Void) {
+                override fun success(data: Void?) {
                     isShowLoader.value = false
                     onCancelTransactionSuccess.value = true
                 }
             })
     }
 
-
-//    fun onCancelClick() {
-//        if (transactionJob?.isActive == true) {
-//            transactionJob?.cancel()
-//            transactionOngoing.value = false
-//            snackbarResId.value = R.string.transaction_cancelled
-//        }
-//    }
 
     fun getTransactionOngoing(): LiveData<Boolean> = transactionOngoing
     fun getTransactionListDetails(): LiveData<List<Transaction>> = transactionListInfo

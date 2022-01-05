@@ -32,7 +32,7 @@ class TerminalListViewModel(application: Application) : BaseViewModel(applicatio
 
             override fun error(exception: RmsApiException) {
                 isShowLoader.value = false
-                snackbarMessage.value = exception.apiError.message
+                snackbarMessage.value = exception.apiError
             }
         })
     }

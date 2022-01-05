@@ -53,7 +53,7 @@ class PayViewModel(application: Application) : BaseViewModel(application) {
 
                 override fun error(exception: RmsApiException) {
                     transactionOngoing.value = false
-                    snackbarMessage.value = exception.apiError.message
+                    snackbarMessage.value = exception.apiError
                 }
             })
     }
@@ -79,7 +79,7 @@ class PayViewModel(application: Application) : BaseViewModel(application) {
 
                 override fun error(exception: RmsApiException) {
                     isShowLoader.value = false
-                    snackbarMessage.value = exception.apiError.message
+                    snackbarMessage.value = exception.apiError
                 }
             })
     }
@@ -117,7 +117,7 @@ class PayViewModel(application: Application) : BaseViewModel(application) {
             object : RmsApiCallback<Void> {
                 override fun error(exception: RmsApiException) {
                     isShowLoader.value = false
-                    snackbarMessage.value = exception.apiError.message
+                    snackbarMessage.value = exception.apiError
                 }
 
                 override fun success(data: Void?) {

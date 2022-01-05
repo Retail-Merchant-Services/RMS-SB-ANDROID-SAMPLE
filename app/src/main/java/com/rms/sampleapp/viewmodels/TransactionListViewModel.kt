@@ -18,7 +18,7 @@ class TransactionListViewModel(application: Application) : BaseViewModel(applica
         RmsClient.getTransactionsList(object : RmsApiCallback<ModelTransaction> {
             override fun error(exception: RmsApiException) {
                 isShowLoader.value = false
-                snackbarMessage.value = exception.apiError.message
+                snackbarMessage.value = exception.apiError
             }
 
             override fun success(data: ModelTransaction?) {
@@ -39,7 +39,7 @@ class TransactionListViewModel(application: Application) : BaseViewModel(applica
             callback = object : RmsApiCallback<ModelTransaction> {
                 override fun error(exception: RmsApiException) {
                     isShowLoader.value = false
-                    snackbarMessage.value = exception.apiError.message
+                    snackbarMessage.value = exception.apiError
                 }
 
                 override fun success(data: ModelTransaction?) {
@@ -58,7 +58,7 @@ class TransactionListViewModel(application: Application) : BaseViewModel(applica
             object : RmsApiCallback<Transaction> {
                 override fun error(exception: RmsApiException) {
                     isShowLoader.value = false
-                    snackbarMessage.value = exception.apiError.message
+                    snackbarMessage.value = exception.apiError
                 }
 
                 override fun success(data: Transaction?) {

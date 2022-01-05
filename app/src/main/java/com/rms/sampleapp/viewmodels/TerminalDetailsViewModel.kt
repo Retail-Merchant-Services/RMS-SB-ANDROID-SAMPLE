@@ -30,7 +30,7 @@ class TerminalDetailsViewModel(application: Application) : BaseViewModel(applica
 
             override fun error(exception: RmsApiException) {
                 isShowLoader.value = false
-                snackbarMessage.value = exception.apiError.message
+                snackbarMessage.value = exception.apiError
             }
 
         })
@@ -48,7 +48,7 @@ class TerminalDetailsViewModel(application: Application) : BaseViewModel(applica
         RmsClient.requestReportByType(reportType, object : RmsApiCallback<Void> {
             override fun error(exception: RmsApiException) {
                 isShowLoader.value = false
-                snackbarMessage.value = exception.apiError.message
+                snackbarMessage.value = exception.apiError
             }
 
             override fun success(data: Void?) {

@@ -19,6 +19,15 @@ class TerminalDetailsViewModel(application: Application) : BaseViewModel(applica
     fun fetchTerminalDetails(terminal: Terminal) {
         if (terminalDetails.value != null) return
         isShowLoader.value = true
+        //To verify ERROR_INVALID_TID / ERROR_BAD_REQUEST
+//        RmsClient.setActiveTerminal("dwerwer34fc")
+
+        //To verify ERROR_TERMINAL_NOT_FOUND / ERROR_BAD_REQUEST
+//        RmsClient.setActiveTerminal("ef5fba7f-4198-4599-9e9b-4aa1b059182d")
+
+        //To verify 6 - ERROR_INVALID_TOKEN
+//        RmsClient.setTokens("accessToken", "refreshToken")
+
         RmsClient.setActiveTerminal(terminal.getTerminalId())
         RmsClient.getTerminalDetails(object : RmsApiCallback<Terminal> {
             override fun success(data: Terminal?) {
@@ -44,9 +53,17 @@ class TerminalDetailsViewModel(application: Application) : BaseViewModel(applica
 
     fun onReportsClicked(terminalId: String, reportType: String) {
         isShowLoader.value = true
+
+        // To verify ERROR_TERMINAL_NOT_FOUND
+//        RmsClient.setActiveTerminal("ef5fba7f-4198-4599-9e9b-4aa1b059182d")
         RmsClient.setActiveTerminal(terminalId)
+
+        // To verify ERROR_INVALID_REPORT_TYPE
+//        RmsClient.requestReportByType("reportType", object : RmsApiCallback<Void> {
+
         RmsClient.requestReportByType(reportType, object : RmsApiCallback<Void> {
             override fun error(exception: RmsApiException) {
+
                 isShowLoader.value = false
                 snackbarMessage.value = exception.apiError
             }

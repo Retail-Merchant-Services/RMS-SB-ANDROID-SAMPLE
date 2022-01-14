@@ -17,6 +17,9 @@ class MainActivity : BaseActivity() {
         btSignIn.setOnClickListener {
             RmsClient.signIn(this, object : RmsAuthCallback {
                 override fun success(accessToken: String, refreshToken: String) {
+                    // To Verify ERROR_INVALID_TOKEN
+//                    RmsClient.setTokens("accessToken", refreshToken)
+
                     RmsClient.setTokens(accessToken, refreshToken)
                     startActivity(Intent(this@MainActivity, HomeActivity::class.java))
                     finishAffinity()

@@ -28,6 +28,8 @@ class PayViewModel(application: Application) : BaseViewModel(application) {
 
     fun updateTerminal(terminal: Terminal) {
         this.terminal = terminal
+        // To Verify 11- ERROR_TERMINAL_NOT_FOUND
+//        RmsClient.setActiveTerminal("ef5fba7f-4198-4599-9e9b-4aa1b059123f")
         RmsClient.setActiveTerminal(terminal.getTerminalId())
     }
 
@@ -60,6 +62,18 @@ class PayViewModel(application: Application) : BaseViewModel(application) {
 
     fun checkTransactionStatus(transaction: Transaction) {
         isShowLoader.value = true
+        // To Verify 14- ERROR_TRANSACTION_NOT_FOUND
+//        RmsClient.checkStatus("ef5fba7f-4198-4599-9e9b-4aa1b059123f",
+
+            // To Verify 12- ERROR_BAD_REQUEST
+//        RmsClient.checkStatus("ef5fba7f-4198",
+
+        // To Verify 13- ERROR_TERMINAL_NOT_FOUND
+//        RmsClient.setActiveTerminal("ef5fba7f-4198-4599-9e9b-4aa1b059123f")
+
+        // To Verify 15 B- ERROR_BAD_REQUEST
+//        RmsClient.setActiveTerminal(transaction.terminalId)
+
         RmsClient.checkStatus(transaction.getTransactionId(),
             object : RmsApiCallback<Transaction> {
                 override fun success(data: Transaction?) {
@@ -112,7 +126,17 @@ class PayViewModel(application: Application) : BaseViewModel(application) {
 
     fun cancelTransaction(transaction: Transaction) {
         isShowLoader.value = true
+        // To Verify 15 A- ERROR_BAD_REQUEST
+//        RmsClient.setActiveTerminal("ef5fba7f-4198")
+
+        // To Verify 16- ERROR_TERMINAL_NOT_FOUND
+//        RmsClient.setActiveTerminal("ef5fba7f-4198-4599-9e9b-4aa1b059182d")
+
         RmsClient.setActiveTerminal(transaction.terminalId)
+
+        // To Verify 17 - ERROR_TRANSACTION_NOT_FOUND
+//        RmsClient.cancelTransaction("ef5fba7f-4198-4599-9e9b-4aa1b059182d",
+
         RmsClient.cancelTransaction(transaction.getTransactionId(),
             object : RmsApiCallback<Void> {
                 override fun error(exception: RmsApiException) {
